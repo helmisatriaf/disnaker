@@ -16,8 +16,7 @@
 			}
 		}
 
-		public function insert(){
-
+		public function create(){
 			if (isset($_POST['submit'])) {
 				if (isset($_POST['tanggal_masuk_bidang_dan_verifikasi']) 
 				&& isset($_POST['no_online_dan_tanggal_online'])
@@ -31,7 +30,18 @@
 				&& isset($_POST['jumlah_anggota']) 
 				&& isset($_POST['nomer_telephone']) 
 				&& isset($_POST['kekurangan']) ) {
-					if (!empty($_POST['tanggal_masuk_bidang_dan_verifikasi']) && !empty($_POST['no_online_dan_tanggal_online']) && !empty($_POST['nama_pemohon']) && !empty($_POST['nomor_surat_permohonan']) && !empty($_POST['tanggal_surat_permohonan']) && !empty($_POST['nama_serikat_pekerja_atau_serikat_buruh']) && !empty($_POST['alamat_serikat_pekerja_atau_serikat_buruh']) && !empty($_POST['nomor_sk_pertek']) && !empty($_POST['ketua_atau_sekretaris']) && !empty($_POST['jumlah_anggota']) && !empty($_POST['nomer_telephone']) && !empty($_POST['kekurangan']) ) {
+					if (!empty($_POST['tanggal_masuk_bidang_dan_verifikasi']) 
+					&& !empty($_POST['no_online_dan_tanggal_online']) 
+					&& !empty($_POST['nama_pemohon']) 
+					&& !empty($_POST['nomor_surat_permohonan']) 
+					&& !empty($_POST['tanggal_surat_permohonan']) 
+					&& !empty($_POST['nama_serikat_pekerja_atau_serikat_buruh']) 
+					&& !empty($_POST['alamat_serikat_pekerja_atau_serikat_buruh']) 
+					&& !empty($_POST['nomor_sk_pertek']) 
+					&& !empty($_POST['ketua_atau_sekretaris']) 
+					&& !empty($_POST['jumlah_anggota']) 
+					&& !empty($_POST['nomer_telephone']) 
+					&& !empty($_POST['kekurangan']) ) {
 						
 						$satu = $_POST['tanggal_masuk_bidang_dan_verifikasi'];
 						$dua = $_POST['no_online_dan_tanggal_online'];
@@ -46,62 +56,25 @@
 						$sebelas = $_POST['nomer_telephone'];
 						$duabelas = $_POST['kekurangan'];
 
-						$query = "INSERT INTO sp2022 (tanggal_masuk_bidang_dan_verifikasi, 
-						no_online_dan_tanggal_online, 
-						nama_pemohon, nomor_surat_permohonan, 
-						tanggal_surat_permohonan, 
-						nama_serikat_pekerja_atau_serikat_buruh, 
-						alamat_serikat_pekerja_atau_serikat_buruh, 
-						nomor_sk_pertek, 
-						ketua_atau_sekretaris, jumlah_anggota, nomer_telephone, kekurangan) VALUES ('$satu','$dua','$tiga','$empat','$lima','$enam','$tujuh','$delapan','$sembilan','$sepuluh','$sebelas','$duabelas')";
+						$query = "INSERT INTO sp2022 (tanggal_masuk_bidang_dan_verifikasi, no_online_dan_tanggal_online, nama_pemohon, nomor_surat_permohonan, tanggal_surat_permohonan, nama_serikat_pekerja_atau_serikat_buruh, alamat_serikat_pekerja_atau_serikat_buruh, nomor_sk_pertek, ketua_atau_sekretaris, jumlah_anggota, nomer_telephone, kekurangan) VALUES ('$satu', '$dua', '$tiga', '$empat', '$lima', '$enam', '$tujuh', '$delapan', '$sembilan', '$sepuluh', '$sebelas', '$duabelas')";
 						
-						echo "<script>console.log($query);</script>";
-						echo "<script>console.log('Debug Objects: " . $sql = $this->conn->query($query) . "');</script>";
 						if ($sql = $this->conn->query($query)) {
-							echo "<script>alert('data added successfully');</script>";
+							echo "<script>alert(`Data Pemohon $tiga Berhasil Ditambahkan`);</script>";
 							echo "<script>window.location.href = 'index.php';</script>";
 						}else{
-			
-							echo "<script>alert('failed');</script>";
+							echo "<script>alert('Data Pemohon $tiga Gagal Ditambahkan');</script>";
 							echo "<script>window.location.href = 'index.php';</script>";
 						}
 
 					}else{
-						echo "<script>alert('empty');</script>";
+						echo "<script>alert('Form Tidak Boleh Ada Yang Kosong Yaaa');</script>";
 						echo "<script>window.location.href = 'index.php';</script>";
 					}
 				}
 			}
 		}
 
-		public function hasil(){
-
-			if (isset($_POST['submit'])) {
-				if (isset($_POST['hasil']) && isset($_POST['kondisi']) && isset($_POST['wilayah'])) {
-					if (!empty($_POST['hasil']) && isset($_POST['kondisi']) && isset($_POST['wilayah']) ) {
-						
-						$hasil = $_POST['hasil'];
-						$kondisi = $_POST['kondisi'];
-						$wilayah = $_POST['wilayah'];
-
-						$query = "INSERT INTO hasiltani (hasil,kondisi,wilayah) VALUES ('$hasil','$kondisi','$wilayah')";
-						if ($sql = $this->conn->query($query)) {
-							echo "<script>alert('taniku added successfully');</script>";
-							echo "<script>window.location.href = 'datahasil.php';</script>";
-						}else{
-							echo "<script>alert('failed');</script>";
-							echo "<script>window.location.href = 'datahasil.php';</script>";
-						}
-
-					}else{
-						echo "<script>alert('empty');</script>";
-						echo "<script>window.location.href = 'datahasil.php';</script>";
-					}
-				}
-			}
-		}
-
-		public function fetch(){
+		public function read(){
 			$data = null;
 
 			$query = "SELECT * FROM sp2022";
@@ -114,56 +87,11 @@
 			return $data;
 		}
 
-		public function fetchhasil(){
-			$data = null;
-
-			$query = "SELECT * FROM hasiltani";
-			if ($sql = $this->conn->query($query)) {
-				while ($row = mysqli_fetch_assoc($sql)) {
-					$data[] = $row;
-				}
-			}
-			return $data;
-		}
-
-		public function delete($id){
-
-			$query = "DELETE FROM taniku where id = '$id'";
-			if ($sql = $this->conn->query($query)) {
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		public function deletehasil($id){
-
-			$query = "DELETE FROM hasiltani where id = '$id'";
-			if ($sql = $this->conn->query($query)) {
-				return true;
-			}else{
-				return false;
-			}
-		}
-
 		public function edit($id){
 
 			$data = null;
 
-			$query = "SELECT * FROM taniku WHERE id = '$id'";
-			if ($sql = $this->conn->query($query)) {
-				while($row = $sql->fetch_assoc()){
-					$data = $row;
-				}
-			}
-			return $data;
-		}
-
-		public function edithasil($id){
-
-			$data = null;
-
-			$query = "SELECT * FROM hasiltani WHERE id = '$id'";
+			$query = "SELECT * FROM sp2022 WHERE id = '$id'";
 			if ($sql = $this->conn->query($query)) {
 				while($row = $sql->fetch_assoc()){
 					$data = $row;
@@ -174,7 +102,22 @@
 
 		public function update($data){
 
-			$query = "UPDATE taniku SET name='$data[name]', kecamatan='$data[kecamatan]', kontak='$data[kontak]', gender='$data[gender]' WHERE id='$data[id] '";
+			$query = "UPDATE sp2022 SET 
+
+			tanggal_masuk_bidang_dan_verifikasi='$data[tanggal_masuk_bidang_dan_verifikasi]', 
+			no_online_dan_tanggal_online='$data[no_online_dan_tanggal_online]', 
+			nama_pemohon='$data[nama_pemohon]', 
+			nomor_surat_permohonan='$data[nomor_surat_permohonan]', 
+			tanggal_surat_permohonan='$data[tanggal_surat_permohonan]', 
+			nama_serikat_pekerja_atau_serikat_buruh='$data[nama_serikat_pekerja_atau_serikat_buruh]', 
+			alamat_serikat_pekerja_atau_serikat_buruh='$data[alamat_serikat_pekerja_atau_serikat_buruh]', 
+			nomor_sk_pertek='$data[nomor_sk_pertek]', 
+			ketua_atau_sekretaris='$data[ketua_atau_sekretaris]', 
+			jumlah_anggota='$data[jumlah_anggota]', 
+			nomer_telephone='$data[nomer_telephone]', 
+			kekurangan='$data[kekurangan]'
+
+			WHERE id = '$data[id]'";
 
 			if ($sql = $this->conn->query($query)) {
 				return true;
@@ -183,10 +126,9 @@
 			}
 		}
 
-		public function updatehasil($data){
+		public function delete($id){
 
-			$query = "UPDATE hasiltani SET hasil='$data[hasil]', kondisi='$data[kondisi]', wilayah='$data[wilayah]' WHERE id='$data[id] '";
-
+			$query = "DELETE FROM sp2022 where id = '$id'";
 			if ($sql = $this->conn->query($query)) {
 				return true;
 			}else{

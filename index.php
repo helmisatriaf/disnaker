@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Dashboard SP Dinperinaker Kota Surabaya</title>
+    <title>Dashboard SP | Dinperinaker Kota Surabaya</title>
 
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
@@ -31,7 +31,7 @@
     } );
     </script>
 
-  <link href="dashboard.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
   </head>
 
   <body>
@@ -60,14 +60,14 @@
           <ul class="nav nav-sidebar" style="padding:15px;">
             <li><img src="logodisperinaker.png" class="img-responsive"></li>
           </ul>
-          <ul class="nav nav-sidebar">
+          <ul class="nav">
             <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span> Dashboard </a></li>
           </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="input.php"><span class="glyphicon glyphicon-envelope"></span> Input Data</a></li>
+          <ul class="nav">
+            <li><a href="data.php"><span class="glyphicon glyphicon-envelope"></span> Data SP</a></li>
           </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
+          <ul class="nav">
+            <li><a href="input.php"><span class="glyphicon glyphicon-envelope"></span> Input Data</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -96,7 +96,7 @@
               <?php
                 include 'model.php';
                 $model = new Model();
-                $rows = $model->fetch();
+                $rows = $model->read();
                 $i = 1;
                 if(!empty($rows)){
                   foreach($rows as $row){ 
@@ -116,8 +116,8 @@
                 <td style="text-align:center;vertical-align:middle;font-size:10;"><?php echo $row['nomer_telephone']; ?></td>
                 <td style="text-align:center;vertical-align:middle;font-size:10;"><?php echo $row['kekurangan']; ?></td>
                 <td style="text-align:center;vertical-align:middle;font-size:10;">
-                  <a href="delete.php?id=<?php echo $row['no']; ?>" class=" m-1 text-align-center vertical-align-middle ">Delete</a>
-                  <a href="edit.php?id=<?php echo $row['no']; ?>" class=" m-5 text-align-center vertical-align-middle">Edit</a>
+                  <a href="delete.php?id=<?php echo $row['id']; ?>" class=" m-1 text-align-center vertical-align-middle ">Delete</a>
+                  <a href="edit.php?id=<?php echo $row['id']; ?>" class=" m-5 text-align-center vertical-align-middle">Edit</a>
                 </td>
               </tr>
 
