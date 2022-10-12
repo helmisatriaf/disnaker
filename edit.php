@@ -67,7 +67,7 @@
             <li><a href="data.php"><span class="glyphicon glyphicon-envelope"></span> Data SP</a></li>
           </ul>
           <ul class="nav">
-            <li><a href="input.php"><span class="glyphicon glyphicon-envelope"></span> Input Data</a></li>
+            <li><a href="input.php"><span class="glyphicon glyphicon-download-alt"></span> Input Data</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
